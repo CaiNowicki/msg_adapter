@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Result</title>
+    <style>
+      .container {
+        margin: 20px;
+      }
+      .email-result {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 15px;
+        background-color: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Processing Result</h1>
+      {% if file_results %}
+        {% for result in file_results %}
+          <div class="email-result">
+            {% if result[1] %}
+              <p><strong>Email sender:</strong> {{ result[1] }}</p>
+              <p><strong>Email subject:</strong> {{ result[2] }}</p>
+              <p><strong>This email's urgency rating is:</strong> {{ result[0] }}</p>
+              <p><strong>Email body:</strong></p>
+              <pre>{{ result[3] }}</pre>
+            {% else %}
+              <p>{{ result[0] }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% endif %}
+      {% if text_result %}
+        <div>
+          <p><strong>This text's urgency rating is:</strong> {{ text_result }}</p>
+          <p><strong>The text you entered was:</strong> {{ text_data }}</p>
+        </div>
+      {% endif %}
+      <a href="{{ url_for('index') }}">Upload another file or text</a>
+    </div>
+  </body>
+</html>
