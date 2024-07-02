@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 import re
 import extract_msg
+import random
 
 app = Flask(__name__, static_url_path='/static')
 # Database configuration
@@ -58,7 +59,7 @@ def process_msg_file(filepath):
     body = msg.body
     sender = msg.sender
 
-    urgency_metric = 4.2 # dummy value, to be replaced later
+    urgency_metric = round(random.uniform(1.0, 5.0), 1) # dummy value, to be replaced later, generates a random float in the range 1-5
     return urgency_metric, sender, subject, body
 
 def process_text(text_data):
